@@ -133,48 +133,49 @@
         Machine Learning Powered Cardiovascular Risk Prediction
     </div>
 
-    <form action="/predict" method="post">
+    <form action="/predict" method="POST">
 
         <div class="section-title full">Personal Information</div>
-        <input type="number" step="any" name="age" placeholder="Age (years)" required>
-        <select name="gender">
+        <input type="number" name="age" placeholder="Age (years)" required>
+
+        <select name="gender" required>
             <option value="1">Male</option>
-            <option value="2">Female</option>
+            <option value="0">Female</option>
         </select>
 
         <div class="section-title full">Physical Metrics</div>
-        <input type="number" step="any" name="height" placeholder="Height (cm)" required>
-        <input type="number" step="any" name="weight" placeholder="Weight (kg)" required>
+        <input type="number" name="height" placeholder="Height (cm)" required>
+        <input type="number" name="weight" placeholder="Weight (kg)" required>
 
         <div class="section-title full">Blood Pressure</div>
-        <input type="number" step="any" name="ap_hi" placeholder="Systolic BP" required>
-        <input type="number" step="any" name="ap_lo" placeholder="Diastolic BP" required>
+        <input type="number" name="ap_hi" placeholder="Systolic BP" required>
+        <input type="number" name="ap_lo" placeholder="Diastolic BP" required>
 
         <div class="section-title full">Metabolic Indicators</div>
-        <select name="cholesterol">
+        <select name="cholesterol" required>
             <option value="1">Normal Cholesterol</option>
             <option value="2">Above Normal</option>
             <option value="3">Well Above Normal</option>
         </select>
 
-        <select name="gluc">
+        <select name="glucose" required>
             <option value="1">Normal Glucose</option>
             <option value="2">Above Normal</option>
             <option value="3">Well Above Normal</option>
         </select>
 
         <div class="section-title full">Lifestyle Factors</div>
-        <select name="smoke">
+        <select name="smoke" required>
             <option value="0">Non-Smoker</option>
             <option value="1">Smoker</option>
         </select>
 
-        <select name="alco">
+        <select name="alcohol" required>
             <option value="0">No Alcohol</option>
             <option value="1">Consumes Alcohol</option>
         </select>
 
-        <select name="active" class="full">
+        <select name="active" class="full" required>
             <option value="0">Not Physically Active</option>
             <option value="1">Physically Active</option>
         </select>
