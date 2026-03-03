@@ -5,50 +5,57 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Load trained model
-model = pickle.load(open("models/best_model.pkl", "rb"))
+# -------------------------------
+# Robust Model Path (Production Safe)
+# -------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "models", "hypertension_model.pkl")
 
+# Load model safely
+model = pickle.load(open(model_path, "rb"))
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        age = float(request.form["age"])
+        age = int(request.form["age"])
         gender = int(request.form["gender"])
         height = float(request.form["height"])
         weight = float(request.form["weight"])
-        ap_hi = float(request.form["ap_hi"])
-        ap_lo = float(request.form["ap_lo"])
+        ap_hi = int(request.form["ap_hi"])
+        ap_lo = int(request.form["ap_lo"])
         cholesterol = int(request.form["cholesterol"])
-        gluc = int(request.form["gluc"])
+        glucose = int(request.form["glucose"])
         smoke = int(request.form["smoke"])
-        alco = int(request.form["alco"])
+        alcohol = int(request.form["alcohol"])
         active = int(request.form["active"])
 
-        features = np.array([[age, gender, height, weight, ap_hi,
-                              ap_lo, cholesterol, gluc, smoke, alco, active]])
+        input_data = np.array([[age, gender, height, weight,
+                                ap_hi, ap_lo,
+                                cholesterol, glucose,
+                                smoke, alcohol, active]])
 
-        prediction = model.predict(features)[0]
+        prediction = model.predict(input_data)[0]
 
         if prediction == 0:
             result = "Low Risk"
-            color = "green"
-        else:
+            badge = "success"
+        elif prediction == 1:
             result = "High Risk"
-            color = "red"
+            badge = "danger"
+        else:
+            result = "Moderate Risk"
+            badge = "warning"
 
-        return render_template("result.html", prediction=result, color=color)
-
-    except Exception:
         return render_template("result.html",
-                               prediction="Invalid Input",
-                               color="orange")
+                               prediction_text=result,
+                               badge_color=badge)
 
+    except Exception as e:
+        return f"Error occurred: {str(e)}"
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
