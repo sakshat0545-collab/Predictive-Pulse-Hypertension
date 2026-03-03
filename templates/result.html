@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hypertension Risk Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            width: 520px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .brand {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .risk {
+            font-size: 24px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            color: white;
+            background-color: {{ risk_color }};
+        }
+
+        .probability {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .recommendation {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .disclaimer {
+            font-size: 11px;
+            color: #888;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Predictive Pulse</h2>
+    <div class="brand">AI-Based Hypertension Risk Assessment</div>
+
+    <div class="risk">{{ prediction_text }}</div>
+
+    <div class="probability">
+        Model Confidence: <strong>{{ probability }}</strong>
+    </div>
+
+    <div class="recommendation">
+        {{ recommendation }}
+    </div>
+
+    <a href="/" class="btn">Analyze Another Case</a>
+
+    <div class="disclaimer">
+        This tool is intended for educational and decision-support purposes only.
+        It does not replace professional medical diagnosis.
+    </div>
+</div>
+
+</body>
+</html>

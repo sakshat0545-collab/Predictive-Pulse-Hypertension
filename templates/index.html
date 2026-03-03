@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predictive Pulse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .header {
+            background: rgba(0,0,0,0.15);
+            padding: 15px 30px;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            width: 850px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        input, select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .disclaimer {
+            grid-column: span 2;
+            font-size: 12px;
+            color: #777;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        @media(max-width: 900px){
+            .card {
+                width: 90%;
+            }
+            form {
+                grid-template-columns: 1fr;
+            }
+            button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Predictive Pulse | AI Healthcare Intelligence
+</div>
+
+<div class="wrapper">
+<div class="card">
+
+    <h1>Hypertension Risk Assessment</h1>
+    <div class="subtitle">
+        Machine Learning Powered Cardiovascular Risk Prediction
+    </div>
+
+    <form action="/predict" method="post">
+
+        <div class="section-title full">Personal Information</div>
+        <input type="number" step="any" name="age" placeholder="Age (years)" required>
+        <select name="gender">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+
+        <div class="section-title full">Physical Metrics</div>
+        <input type="number" step="any" name="height" placeholder="Height (cm)" required>
+        <input type="number" step="any" name="weight" placeholder="Weight (kg)" required>
+
+        <div class="section-title full">Blood Pressure</div>
+        <input type="number" step="any" name="ap_hi" placeholder="Systolic BP" required>
+        <input type="number" step="any" name="ap_lo" placeholder="Diastolic BP" required>
+
+        <div class="section-title full">Metabolic Indicators</div>
+        <select name="cholesterol">
+            <option value="1">Normal Cholesterol</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above Normal</option>
+        </select>
+
+        <select name="gluc">
+            <option value="1">Normal Glucose</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above Normal</option>
+        </select>
+
+        <div class="section-title full">Lifestyle Factors</div>
+        <select name="smoke">
+            <option value="0">Non-Smoker</option>
+            <option value="1">Smoker</option>
+        </select>
+
+        <select name="alco">
+            <option value="0">No Alcohol</option>
+            <option value="1">Consumes Alcohol</option>
+        </select>
+
+        <select name="active" class="full">
+            <option value="0">Not Physically Active</option>
+            <option value="1">Physically Active</option>
+        </select>
+
+        <button type="submit">Analyze Risk</button>
+
+        <div class="disclaimer">
+            This system is intended for decision-support and educational purposes only.
+        </div>
+
+    </form>
+
+</div>
+</div>
+
+</body>
+</html>
