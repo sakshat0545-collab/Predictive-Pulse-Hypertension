@@ -5,13 +5,9 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# -------------------------------
-# Robust Model Path (Production Safe)
-# -------------------------------
+# Robust model loading
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(BASE_DIR, "models", "hypertension_model.pkl")
-
-# Load model safely
 model = pickle.load(open(model_path, "rb"))
 
 @app.route("/")
@@ -43,12 +39,9 @@ def predict():
         if prediction == 0:
             result = "Low Risk"
             badge = "success"
-        elif prediction == 1:
+        else:
             result = "High Risk"
             badge = "danger"
-        else:
-            result = "Moderate Risk"
-            badge = "warning"
 
         return render_template("result.html",
                                prediction_text=result,
@@ -57,5 +50,8 @@ def predict():
     except Exception as e:
         return f"Error occurred: {str(e)}"
 
+
+# IMPORTANT: Production Port Binding
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
