@@ -6,7 +6,7 @@ This project analyzes patient health parameters and predicts cardiovascular dise
 ---
 
 ## 🚀 Live Demo
-(Will be added after deployment)
+https://predictive-pulse-hypertension.onrender.com
 
 ---
 
